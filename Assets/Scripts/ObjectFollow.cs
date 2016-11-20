@@ -7,6 +7,7 @@ public class ObjectFollow : MonoBehaviour {
     float distance = 10.0f;
     float speed = 300.0f;
     Camera playerCamera;
+    float forceAmount = 20000;
 
 	// Use this for initialization
 	void Start ()
@@ -19,11 +20,26 @@ public class ObjectFollow : MonoBehaviour {
 	void Update ()
     {
         #region Drop Item
-        if(Input.GetKeyDown(KeyCode.E) && player.GetComponent<ObjectGrab>().itemGrabbed != null)
+        if (player.GetComponent<ObjectGrab>().itemGrabbed != null)
         {
-            Destroy(this);
-            player.GetComponent<ObjectGrab>().itemGrabbed = null;
+            //if (Input.GetKeyDown(KeyCode.E))
+            if (!Input.GetMouseButton(0))
+            {
+                player.GetComponent<ObjectGrab>().itemGrabbed = null;
+                Destroy(this);
+            }
+
+            //if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
+            {
+                GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * forceAmount);
+                player.GetComponent<ObjectGrab>().itemGrabbed = null;
+                Destroy(this);
+            }
+
         }
+
+
         #endregion
 
         #region Scrolling
@@ -36,7 +52,7 @@ public class ObjectFollow : MonoBehaviour {
         #endregion
 
         #region Moving
-        GetComponent<Rigidbody>().velocity = (((player.transform.position + playerCamera.transform.forward * distance) - transform.position) * speed * Time.deltaTime);
+        GetComponent<Rigidbody>().velocity = (((playerCamera.transform.position + playerCamera.transform.forward * distance) - transform.position) * speed * Time.deltaTime);
         #endregion
 
     }

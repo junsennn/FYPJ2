@@ -19,6 +19,7 @@ public class ObjectGrab : MonoBehaviour
     {
         #region Raycast 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Debug.DrawRay(transform.position, ray.direction * 10);
    
         //Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
         if (Physics.Raycast(ray, out hit, distance))
@@ -27,7 +28,8 @@ public class ObjectGrab : MonoBehaviour
             {
                 print("Im looking at " + hit.transform.name);
 
-                if(Input.GetKeyDown(KeyCode.E) && itemGrabbed == null)
+                //if(Input.GetKeyDown(KeyCode.E) && itemGrabbed == null)
+                if (Input.GetMouseButton(0) && itemGrabbed == null)
                 {
                     if(!hit.transform.gameObject.GetComponent<ObjectFollow>())
                         hit.transform.gameObject.AddComponent<ObjectFollow>();
