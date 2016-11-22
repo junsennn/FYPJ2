@@ -24,10 +24,9 @@ public class ObjectGrab : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
         if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.name != "Terrain" && hit.transform.name != "Player" && hit.transform.name != "catsup (2)")
+            print("Im looking at " + hit.transform.name);
+            if (hit.collider.tag == "Rubbish")
             {
-                print("Im looking at " + hit.transform.name);
-
                 //if(Input.GetKeyDown(KeyCode.E) && itemGrabbed == null)
                 if (Input.GetMouseButton(0) && itemGrabbed == null)
                 {

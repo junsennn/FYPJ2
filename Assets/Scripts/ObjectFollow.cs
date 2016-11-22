@@ -12,8 +12,8 @@ public class ObjectFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        player = GameObject.Find("Player");
-        playerCamera = player.transform.GetChild(0).GetComponent<Camera>();
+        player = GameObject.Find("Player").transform.GetChild(0).gameObject;
+        playerCamera = player.GetComponent<Camera>();
     }
 	
 	// Update is called once per frame
