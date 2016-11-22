@@ -55,6 +55,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+			// This is to lock the cursor within the game and to also disable the mouse cursor icon
+			Cursor.lockState = CursorLockMode.Locked;
         }
 
 
@@ -229,6 +232,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StopAllCoroutines();
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
+
+			// When pressed "ESC", cursor will be shown
+			if (Input.GetKeyDown ("escape")) 
+			{
+				Cursor.lockState = CursorLockMode.None;
+			}
         }
 
 
