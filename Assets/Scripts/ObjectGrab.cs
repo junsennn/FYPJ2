@@ -6,7 +6,7 @@ public class ObjectGrab : MonoBehaviour
 
     RaycastHit hit;
     public GameObject itemGrabbed;
-    float distance = 20.0f;
+    public float distance = 10.0f;
 
     // Use this for initialization
     void Start()
@@ -24,7 +24,7 @@ public class ObjectGrab : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
         if (Physics.Raycast(ray, out hit, distance))
         {
-            print("Im looking at " + hit.transform.name);
+            //print("Im looking at " + hit.transform.name);
             if (hit.collider.tag == "Rubbish")
             {
                 //if(Input.GetKeyDown(KeyCode.E) && itemGrabbed == null)

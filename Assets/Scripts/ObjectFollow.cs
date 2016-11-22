@@ -4,7 +4,7 @@ using System.Collections;
 public class ObjectFollow : MonoBehaviour {
 
     private GameObject player;
-    float distance = 10.0f;
+    float distance = 5.0f;
     float speed = 300.0f;
     Camera playerCamera;
     float forceAmount = 20000;
@@ -43,12 +43,12 @@ public class ObjectFollow : MonoBehaviour {
         #endregion
 
         #region Scrolling
-        if (distance < 30 && distance > 5)
+        if (distance < 15.0f && distance > 3.0f)
             distance += Input.mouseScrollDelta.y;
-        if (distance < 5)
-            distance = 5.1f;
-        if (distance > 30)
-            distance = 29.9f;
+        if (distance < 3.0f)
+            distance = 3.1f;
+        if (distance > 15.0f)
+            distance = 14.9f;
         #endregion
 
         #region Moving

@@ -14,19 +14,19 @@ public class BinCount : MonoBehaviour {
         objectCounts = 0;
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        if(!collidedObjects.Contains(col.collider) && col.collider.tag == "Rubbish")
+        if(!collidedObjects.Contains(col) && col.tag == "Rubbish")
         {
-            collidedObjects.Add(col.collider);
+            collidedObjects.Add(col);
         }
     }
 
-    void OnCollisionExit(Collision col)
+    void OnTriggerExit(Collider col)
     {
-        if (collidedObjects.Contains(col.collider) && col.collider.tag == "Rubbish")
+        if (collidedObjects.Contains(col) && col.tag == "Rubbish")
         {
-            collidedObjects.Remove(col.collider);
+            collidedObjects.Remove(col);
         }
     }
 
