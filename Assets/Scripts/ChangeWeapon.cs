@@ -36,6 +36,8 @@ public class ChangeWeapon : MonoBehaviour {
 
             if (transform.GetChild(0).name == "Portal gun")
                 transform.gameObject.AddComponent<ObjectGrab>();
+            if (transform.GetChild(0).name == "Zarya Gun")
+                transform.gameObject.AddComponent<ZaryaGun>();
         }
     }
 
@@ -46,6 +48,8 @@ public class ChangeWeapon : MonoBehaviour {
         {
             if (transform.GetChild(0).name == "Portal gun")
                 Destroy(GetComponent<ObjectGrab>());
+            if (transform.GetChild(0).name == "Zarya Gun")
+                Destroy(GetComponent<ZaryaGun>());
 
             transform.GetChild(0).gameObject.AddComponent<Rigidbody>();
             transform.GetChild(0).GetComponent<Rigidbody>().AddForce(transform.GetComponent<Camera>().transform.forward * 300);
