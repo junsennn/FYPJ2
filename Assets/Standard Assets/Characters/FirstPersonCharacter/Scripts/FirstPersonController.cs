@@ -236,7 +236,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			// When pressed "ESC", cursor will be shown
 			if (Input.GetKeyDown ("escape")) 
 			{
-				Cursor.lockState = CursorLockMode.None;
+				//Cursor.lockState = CursorLockMode.None;
+				Application.Quit ();
 			}
         }
 

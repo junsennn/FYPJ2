@@ -21,7 +21,7 @@ public class ZaryaRightClick : MonoBehaviour {
     {
         Destroy(GetComponent<Rigidbody>());
         GetComponent<SphereCollider>().isTrigger = true;
-        Vector3 explodeSize = new Vector3(7, 7, 7);
+        Vector3 explodeSize = new Vector3(15, 15, 15);
 
         transform.localScale = explodeSize;
         timeStart = true;
