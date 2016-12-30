@@ -7,7 +7,7 @@ public class ZaryaRightClick : MonoBehaviour {
 
     private bool timeStart = false;
     private float timecount = 0;
-    private bool suckStart = false;
+    public bool suckStart = false;
 
     public List<Transform> suckList = new List<Transform>();
 
@@ -38,10 +38,16 @@ public class ZaryaRightClick : MonoBehaviour {
     {
         if (col.tag == "Rubbish"  && !suckList.Contains(col.transform) )
         {
-            print(col.name);
-
             suckList.Add(col.transform);
             suckStart = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Rubbish" && suckList.Contains(col.transform))
+        {
+            suckList.Remove(col.transform);
         }
     }
 

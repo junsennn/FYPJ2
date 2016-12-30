@@ -2,18 +2,24 @@
 using System.Collections;
 
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ItemInBinCounter : MonoBehaviour {
 
-    public GameObject [] binList;
+    private List<GameObject> binList = new List<GameObject>();
 
     public Text binText;
 
     private int binAmount;
 
 	// Use this for initialization
-	void Start () {
-	    
+	void Start ()
+    {
+        foreach (Transform child in GameObject.Find("RubbishBins").transform)
+        {
+            binList.Add(child.gameObject);
+        }
+
 	}
 	
 	// Update is called once per frame
@@ -21,10 +27,10 @@ public class ItemInBinCounter : MonoBehaviour {
     {
         binAmount = 0;
 
-        for(int i = 0; i < binList.Length; i++)
+        for(int i = 0; i < binList.Count; i++)
         {
             binAmount += binList[i].GetComponent<BinCount>().objectCounts;
-        }
+        }    
 
         binText.text = "Item In Bin :" + binAmount;
 

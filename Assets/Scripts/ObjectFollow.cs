@@ -1,31 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectFollow : MonoBehaviour {
+public class ObjectFollow : MonoBehaviour
+{
 
     private GameObject player;
-    float distance = 5.0f;
+    public float distance = 5.0f;
     float speed = 300.0f;
     Camera playerCamera;
     float forceAmount = 20000;
 
-	// Use this for initialization
-	void Start ()
+    private GameObject itemGrabbed;
+
+    private bool ZaryaGun = false;
+
+    // Use this for initialization
+    void Start()
     {
         player = GameObject.Find("Player").transform.GetChild(0).gameObject;
         playerCamera = player.GetComponent<Camera>();
+
+        if (player.GetComponent<ObjectGrab>())
+            itemGrabbed = player.GetComponent<ObjectGrab>().itemGrabbed;
+        else if (player.GetComponent<ZaryaGun>())
+        {
+            itemGrabbed = player.GetComponent<ZaryaGun>().itemGrabbed;
+            ZaryaGun = true;
+        }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         #region Drop Item
-        if (player.GetComponent<ObjectGrab>().itemGrabbed != null)
+        if (itemGrabbed != null)
         {
             //if (Input.GetKeyDown(KeyCode.E))
             if (!Input.GetMouseButton(0))
             {
-                player.GetComponent<ObjectGrab>().itemGrabbed = null;
+                itemGrabbed = null;
+
+                if (ZaryaGun)
+                    player.GetComponent<ZaryaGun>().itemGrabbed = null;
+                else
+                    player.GetComponent<ObjectGrab>().itemGrabbed = null;
+
                 Destroy(this);
             }
 
@@ -33,7 +52,13 @@ public class ObjectFollow : MonoBehaviour {
             if (Input.GetMouseButtonDown(1))
             {
                 GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * forceAmount);
-                player.GetComponent<ObjectGrab>().itemGrabbed = null;
+                itemGrabbed = null;
+
+                if (ZaryaGun)
+                    player.GetComponent<ZaryaGun>().itemGrabbed = null;
+                else
+                    player.GetComponent<ObjectGrab>().itemGrabbed = null;
+
                 Destroy(this);
             }
 
@@ -43,16 +68,17 @@ public class ObjectFollow : MonoBehaviour {
         #endregion
 
         #region Scrolling
-        if (distance < 15.0f && distance > 3.0f)
+        if (distance > 3.0f)
             distance += Input.mouseScrollDelta.y;
         if (distance < 3.0f)
             distance = 3.1f;
-        if (distance > 15.0f)
-            distance = 14.9f;
         #endregion
 
         #region Moving
-        GetComponent<Rigidbody>().velocity = (((playerCamera.transform.position + playerCamera.transform.forward * distance) - transform.position) * speed * Time.deltaTime);
+        if (!ZaryaGun)
+            GetComponent<Rigidbody>().velocity = (((playerCamera.transform.position + playerCamera.transform.forward * distance) - transform.position) * speed * Time.deltaTime);
+        else
+            transform.position = playerCamera.transform.position + playerCamera.transform.forward * distance;
         #endregion
 
     }
