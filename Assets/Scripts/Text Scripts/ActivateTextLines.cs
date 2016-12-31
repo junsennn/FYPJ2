@@ -10,6 +10,9 @@ public class ActivateTextLines : MonoBehaviour {
 
 	public TextBoxManager manager;
 
+	public bool requireBtnPress; // To click on a button to trigger text box
+	private bool waitBtnPress;
+
 	public bool destroyActivatedText;
 
 	// Use this for initialization
@@ -19,12 +22,7 @@ public class ActivateTextLines : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-
-	void OnTriggerEnter(Collider collide)
-	{
-		if (collide.name == "Player") {
+		if (waitBtnPress == true && Input.GetKeyDown (KeyCode.E)) {
 			manager.ReloadScript (thisText);
 			manager.currentLine = startLine;
 			manager.endLine = endLine;
@@ -33,6 +31,33 @@ public class ActivateTextLines : MonoBehaviour {
 			if (destroyActivatedText == true) {
 				Destroy (gameObject);
 			}
+		}
+	}
+
+	void OnTriggerEnter(Collider collide)
+	{
+		if (collide.name == "Player") {
+
+			if (requireBtnPress == true) {
+				waitBtnPress = true;
+				return;
+			}
+
+			manager.ReloadScript (thisText);
+			manager.currentLine = startLine;
+			manager.endLine = endLine;
+			manager.EnableTextBox ();
+
+			if (destroyActivatedText == true) {
+				Destroy (gameObject);
+			}
+		}
+	}
+
+	void OnTriggerExit(Collider collide)
+	{
+		if (collide.name == "Player") {
+			waitBtnPress = false;
 		}
 	}
 }

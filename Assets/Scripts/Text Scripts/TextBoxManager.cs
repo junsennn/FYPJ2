@@ -18,6 +18,12 @@ public class TextBoxManager : MonoBehaviour {
 
 	public bool isActive;
 
+	// For Autotyping text
+	private bool isTyping = false;
+	private bool cancelTyping = false;
+
+	public float typeSpeed;
+
 	// Use this for initialization
 	void Start () {
 
@@ -45,23 +51,51 @@ public class TextBoxManager : MonoBehaviour {
 			return;
 		}
 
-		thisText.text = textLines [currentLine];
+		//thisText.text = textLines [currentLine];
 
 		// Press 'Enter' key to move on to the next text
 		if (Input.GetKeyDown (KeyCode.Return)) {
-			currentLine += 1;
+			if (isTyping == false) 
+			{
+				currentLine += 1;
+			
+				// After the last line of the text, text box will deactivate
+				if (currentLine > endLine) {
+					DisableTextBox ();
+				} else {
+					StartCoroutine (TextScroll (textLines[currentLine]));
+				}
+			} 
+			else if (isTyping == true && cancelTyping == false)
+			{
+				cancelTyping = true;
+			}
 		}
+	}
 
-		// After the last line of the text, text box will deactivate
-		if (currentLine > endLine) {
-			DisableTextBox ();
+	private IEnumerator TextScroll (string lineText)
+	{
+		int letter = 0;
+		thisText.text = "";
+		isTyping = true;
+		cancelTyping = false;
+		while (isTyping == true && cancelTyping == false && (letter < lineText.Length - 1)) 
+		{
+			thisText.text += lineText [letter];
+			letter += 1;
+			yield return new WaitForSeconds (typeSpeed);
 		}
+		thisText.text = lineText;
+		isTyping = false;
+		cancelTyping = false;
 	}
 
 	public void EnableTextBox()
 	{
 		textBox.SetActive (true);
 		isActive = true;
+
+		StartCoroutine (TextScroll (textLines[currentLine]));
 	}
 
 	public void DisableTextBox()
