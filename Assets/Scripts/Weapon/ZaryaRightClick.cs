@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 public class ZaryaRightClick : MonoBehaviour {
 
-    private bool timeStart = false;
+    public bool timeStart = false;
     private float timecount = 0;
-    public bool suckStart = false;
+    private bool suckStart = false;
 
     public List<Transform> suckList = new List<Transform>();
 

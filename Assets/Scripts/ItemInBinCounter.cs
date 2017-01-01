@@ -9,6 +9,7 @@ public class ItemInBinCounter : MonoBehaviour {
     private List<GameObject> binList = new List<GameObject>();
 
     public Text binText;
+    public bool text;
 
     private int binAmount;
 
@@ -32,7 +33,8 @@ public class ItemInBinCounter : MonoBehaviour {
             binAmount += binList[i].GetComponent<BinCount>().objectCounts;
         }    
 
-        binText.text = "Item In Bin :" + binAmount;
+        if(text)
+            binText.text = "Item In Bin :" + binAmount;
 
 	}
 }

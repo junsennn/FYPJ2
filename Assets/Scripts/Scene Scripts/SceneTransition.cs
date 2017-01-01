@@ -22,7 +22,7 @@ public class SceneTransition : MonoBehaviour
     {
         delta += Time.deltaTime;
 
-        if (delta > duration)
+        if (delta > duration && loadScene)
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 

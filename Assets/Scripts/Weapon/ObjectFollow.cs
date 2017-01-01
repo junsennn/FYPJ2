@@ -49,15 +49,12 @@ public class ObjectFollow : MonoBehaviour
             }
 
             //if (Input.GetMouseButtonDown(0))
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !ZaryaGun)
             {
                 GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * forceAmount);
                 itemGrabbed = null;
-
-                if (ZaryaGun)
-                    player.GetComponent<ZaryaGun>().itemGrabbed = null;
-                else
-                    player.GetComponent<ObjectGrab>().itemGrabbed = null;
+                
+                player.GetComponent<ObjectGrab>().itemGrabbed = null;
 
                 Destroy(this);
             }

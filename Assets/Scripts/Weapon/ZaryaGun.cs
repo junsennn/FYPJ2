@@ -66,7 +66,7 @@ public class ZaryaGun : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(0) && SuckOnCD && !suckbullet.GetComponent<ObjectFollow>() && suckbullet.GetComponent<ZaryaRightClick>().suckStart)
+            if (Input.GetMouseButtonDown(0) && SuckOnCD && !suckbullet.GetComponent<ObjectFollow>() && suckbullet.GetComponent<ZaryaRightClick>().timeStart)
             {
                 suckbullet.AddComponent<ObjectFollow>();
                 itemGrabbed = suckbullet;

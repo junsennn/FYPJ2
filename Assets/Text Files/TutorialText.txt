@@ -1,7 +1,3 @@
-Welcome Master PewPew.
-This is a test.
-Test.
-Test Test.
-
-
-Test Test Test.
+Welcome to our clean city !
+Press W,A,S,D to move and mouse to look around. 
+Try grabbing the ketchup and put it in the bin with Left Click !

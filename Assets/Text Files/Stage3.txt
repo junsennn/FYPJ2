@@ -1,0 +1,2 @@
+Press G to drop weapon ! 
+Move over the weapon to pick it up.

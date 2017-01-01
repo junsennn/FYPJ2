@@ -8,15 +8,33 @@ public class ObjectGrab : MonoBehaviour
     public GameObject itemGrabbed;
     public float distance = 10.0f;
 
+    private bool Shot = false;
+    private float ShotPreventHold = 0.1f;
+    public float ShotCD = 0.2f;
+
     // Use this for initialization
     void Start()
     {
-
+        ShotPreventHold = ShotCD;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(1))
+            Shot = true;
+
+        if (Shot)
+        {
+            ShotPreventHold -= Time.deltaTime;
+
+            if (ShotPreventHold < 0)
+            {
+                ShotPreventHold = ShotCD;
+                Shot = false;
+            }
+        }
+
         #region Raycast 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.DrawRay(transform.position, ray.direction * 10);
@@ -28,7 +46,7 @@ public class ObjectGrab : MonoBehaviour
             if (hit.collider.tag == "Rubbish")
             {
                 //if(Input.GetKeyDown(KeyCode.E) && itemGrabbed == null)
-                if (Input.GetMouseButton(0) && itemGrabbed == null)
+                if (Input.GetMouseButton(0) && itemGrabbed == null && !Shot)
                 {
                     if(!hit.transform.gameObject.GetComponent<ObjectFollow>())
                         hit.transform.gameObject.AddComponent<ObjectFollow>();
