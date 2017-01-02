@@ -15,6 +15,8 @@ public class ActivateTextLines : MonoBehaviour {
 
 	public bool destroyActivatedText;
 
+	public bool isEnded;
+
 	public AudioSource sound;
 
 	// Use this for initialization
@@ -55,6 +57,8 @@ public class ActivateTextLines : MonoBehaviour {
 			if (destroyActivatedText == true) {
 				Destroy (gameObject);
 			}
+
+			isEnded = true;
 		}
 	}
 

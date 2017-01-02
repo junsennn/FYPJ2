@@ -2,3 +2,6 @@ Left click to shoot a suckball
 Suckball can be moved after activated by holding left click.
 Right click to shoot an explosive ball
 Objects will dispurse relatively to the explosive ball.
+
+You have completed the tutorial! Well done!
+Teleporting you back to the Main menu! See you again!

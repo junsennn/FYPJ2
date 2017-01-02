@@ -28,6 +28,10 @@ public class TextBoxManager : MonoBehaviour {
 	// To stop the player from moving
 	public bool stopPlayer;
 
+	// Sound for dialogueBox
+	public AudioSource popUpSound;
+	public AudioSource textClick;
+
 	// Use this for initialization
 	void Start () {
 
@@ -69,6 +73,8 @@ public class TextBoxManager : MonoBehaviour {
 				} else {
 					StartCoroutine (TextScroll (textLines[currentLine]));
 				}
+
+				textClick.Play ();
 			} 
 			else if (isTyping == true && cancelTyping == false)
 			{
@@ -105,6 +111,8 @@ public class TextBoxManager : MonoBehaviour {
 		}
 
 		isActive = true;
+
+		popUpSound.Play ();
 
 		StartCoroutine (TextScroll (textLines[currentLine]));
 	}
