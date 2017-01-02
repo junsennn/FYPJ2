@@ -12,6 +12,8 @@ public class TutorialScript : MonoBehaviour {
 
     private int TutorialStage = 0;
 
+    private bool tutorialComplete = false;
+
 	// Use this for initialization
 	void Start () {
 	    
@@ -20,30 +22,35 @@ public class TutorialScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (TutorialStage != 2 && TutorialStage < RubbishBins.Length - 1)
+        if (!tutorialComplete)
         {
-            if (RubbishBins[TutorialStage].GetComponent<BinCount>().objectCounts >= RubbishCountNeeded[TutorialStage])
-                GoNextStage();
+            if (TutorialStage != 2)
+            {
+                if (RubbishBins[TutorialStage].GetComponent<BinCount>().objectCounts >= RubbishCountNeeded[TutorialStage])
+                    GoNextStage();
+            }
+            else
+            {
+                if (GameObject.Find("Player").transform.GetChild(0).GetComponent<ChangeWeapon>().weapon_Name.text == "Zarya Gun")
+                    GoNextStage();
+            }
         }
-        else
-        {
-            if (GameObject.Find("Player").transform.GetChild(0).GetComponent<ChangeWeapon>().weapon_Name.text == "Zarya Gun")
-                GoNextStage();
-        }
-
 	}
 
     void GoNextStage()
     {
         StartCoroutine(OpenDoor(TutorialStage));
         TutorialStage += 1;
+
+        if (TutorialStage >= RubbishCountNeeded.Length)
+            tutorialComplete = true;
     }
 
     IEnumerator OpenDoor(int DoorNo)
     {
         while (Doors[DoorNo].transform.position.y < DoorMaxHeight)
         {
-            Doors[DoorNo].transform.position += new Vector3(0, 1 * Time.deltaTime, 0);
+            Doors[DoorNo].transform.position = Vector3.Lerp(Doors[DoorNo].transform.position, new Vector3(Doors[DoorNo].transform.position.x, DoorMaxHeight , Doors[DoorNo].transform.position.z), 1 * Time.deltaTime );
 
             yield return new WaitForEndOfFrame();
         }

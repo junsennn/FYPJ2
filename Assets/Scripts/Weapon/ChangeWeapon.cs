@@ -23,7 +23,7 @@ public class ChangeWeapon : MonoBehaviour {
 	
     void OnTriggerEnter(Collider col)
     {
-        if (!transform.GetChild(0).gameObject.activeSelf && col.tag == "Weapon")
+        if (!transform.GetChild(0).gameObject.activeSelf && col.tag == "Weapon" && col.GetComponent<CheckLootStatus>().Lootable)
         {
             col.transform.parent = transform;
             Destroy(col.transform.gameObject.GetComponent<Rigidbody>());
@@ -33,6 +33,8 @@ public class ChangeWeapon : MonoBehaviour {
             col.transform.rotation = gunTransform.transform.rotation;
 
             weapon_Name.text = transform.GetChild(0).name;
+
+            transform.GetChild(0).GetComponent<CheckLootStatus>().LootWeapon();
 
             if (transform.GetChild(0).name == "Portal gun")
                 transform.gameObject.AddComponent<ObjectGrab>();
@@ -53,6 +55,7 @@ public class ChangeWeapon : MonoBehaviour {
 
             transform.GetChild(0).gameObject.AddComponent<Rigidbody>();
             transform.GetChild(0).GetComponent<Rigidbody>().AddForce(transform.GetComponent<Camera>().transform.forward * 300);
+            transform.GetChild(0).GetComponent<CheckLootStatus>().DropWeapon();
             transform.GetChild(0).parent = null;
 
             weapon_Name.text = "No Weapon";
