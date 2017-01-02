@@ -15,6 +15,8 @@ public class ActivateTextLines : MonoBehaviour {
 
 	public bool destroyActivatedText;
 
+	public AudioSource sound;
+
 	// Use this for initialization
 	void Start () {
 		manager = FindObjectOfType<TextBoxManager> ();
@@ -27,6 +29,8 @@ public class ActivateTextLines : MonoBehaviour {
 			manager.currentLine = startLine;
 			manager.endLine = endLine;
 			manager.EnableTextBox ();
+
+			sound.Play ();
 
 			if (destroyActivatedText == true) {
 				Destroy (gameObject);

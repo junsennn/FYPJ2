@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class TextBoxManager : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class TextBoxManager : MonoBehaviour {
 	public int currentLine; // Get the line the text is at
 	public int endLine;
 
-	public FirstPersonCameraControl player;
+	public FirstPersonController player;
 
 	public bool isActive;
 
@@ -24,10 +25,13 @@ public class TextBoxManager : MonoBehaviour {
 
 	public float typeSpeed;
 
+	// To stop the player from moving
+	public bool stopPlayer;
+
 	// Use this for initialization
 	void Start () {
 
-		player = FindObjectOfType<FirstPersonCameraControl>();
+		player = FindObjectOfType<FirstPersonController>();
 
 		if (textFile != null) {
 			// Get the textLines arrays, where the texts are entered in a new line
@@ -93,6 +97,13 @@ public class TextBoxManager : MonoBehaviour {
 	public void EnableTextBox()
 	{
 		textBox.SetActive (true);
+
+		stopPlayer = true;
+
+		if (stopPlayer == true) {
+			player.canMove = false;
+		}
+
 		isActive = true;
 
 		StartCoroutine (TextScroll (textLines[currentLine]));
@@ -102,6 +113,7 @@ public class TextBoxManager : MonoBehaviour {
 	{
 		textBox.SetActive (false);
 		isActive = false;
+		player.canMove = true;
 	}
 
 	public void ReloadScript(TextAsset thisText)
