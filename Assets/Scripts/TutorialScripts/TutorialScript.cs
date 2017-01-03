@@ -35,6 +35,10 @@ public class TutorialScript : MonoBehaviour {
                     GoNextStage();
             }
         }
+        else
+        {
+            PlayerPrefs.SetInt("TutDone", 1);
+        }
 	}
 
     void GoNextStage()

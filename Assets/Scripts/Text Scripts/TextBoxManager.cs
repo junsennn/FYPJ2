@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class TextBoxManager : MonoBehaviour {
 
@@ -31,6 +32,9 @@ public class TextBoxManager : MonoBehaviour {
 	// Sound for dialogueBox
 	public AudioSource popUpSound;
 	public AudioSource textClick;
+
+    public bool LoadSceneWhenDone = false;
+    public string sceneName = "";
 
 	// Use this for initialization
 	void Start () {
@@ -68,8 +72,13 @@ public class TextBoxManager : MonoBehaviour {
 				currentLine += 1;
 			
 				// After the last line of the text, text box will deactivate
-				if (currentLine > endLine) {
-					DisableTextBox ();
+				if (currentLine > endLine)
+                {
+                    if (LoadSceneWhenDone)
+                        SceneManager.LoadScene(sceneName);
+
+                    DisableTextBox ();
+
 				} else {
 					StartCoroutine (TextScroll (textLines[currentLine]));
 				}
@@ -99,6 +108,16 @@ public class TextBoxManager : MonoBehaviour {
 		isTyping = false;
 		cancelTyping = false;
 	}
+
+    public void InitTextBox(TextAsset text, int start, int end , bool load , string scene )
+    {
+        ReloadScript(text);
+        currentLine = start;
+        endLine = end;
+        LoadSceneWhenDone = load;
+        sceneName = scene;
+        EnableTextBox();
+    }
 
 	public void EnableTextBox()
 	{

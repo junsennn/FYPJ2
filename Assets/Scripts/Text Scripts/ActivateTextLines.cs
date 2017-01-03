@@ -19,6 +19,10 @@ public class ActivateTextLines : MonoBehaviour {
 
 	public AudioSource sound;
 
+    public bool LoadSceneWhenEnd = false;
+
+    public string sceneName = "";
+
 	// Use this for initialization
 	void Start () {
 		manager = FindObjectOfType<TextBoxManager> ();
@@ -27,10 +31,8 @@ public class ActivateTextLines : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (waitBtnPress == true && Input.GetKeyDown (KeyCode.E)) {
-			manager.ReloadScript (thisText);
-			manager.currentLine = startLine;
-			manager.endLine = endLine;
-			manager.EnableTextBox ();
+
+            manager.InitTextBox(thisText, startLine, endLine, LoadSceneWhenEnd, sceneName);
 
 			sound.Play ();
 
@@ -49,12 +51,9 @@ public class ActivateTextLines : MonoBehaviour {
 				return;
 			}
 
-			manager.ReloadScript (thisText);
-			manager.currentLine = startLine;
-			manager.endLine = endLine;
-			manager.EnableTextBox ();
+            manager.InitTextBox(thisText, startLine, endLine, LoadSceneWhenEnd, sceneName);
 
-			if (destroyActivatedText == true) {
+            if (destroyActivatedText == true) {
 				Destroy (gameObject);
 			}
 
