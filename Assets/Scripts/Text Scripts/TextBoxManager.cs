@@ -36,6 +36,8 @@ public class TextBoxManager : MonoBehaviour {
     public bool LoadSceneWhenDone = false;
     public string sceneName = "";
 
+    public float timeDur = 0.0f;
+
 	// Use this for initialization
 	void Start () {
 
@@ -75,7 +77,7 @@ public class TextBoxManager : MonoBehaviour {
 				if (currentLine > endLine)
                 {
                     if (LoadSceneWhenDone)
-                        SceneManager.LoadScene(sceneName);
+                        StartCoroutine(LoadScene());
 
                     DisableTextBox ();
 
@@ -109,13 +111,28 @@ public class TextBoxManager : MonoBehaviour {
 		cancelTyping = false;
 	}
 
-    public void InitTextBox(TextAsset text, int start, int end , bool load , string scene )
+    private IEnumerator LoadScene()
+    {
+        float timer = timeDur;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        
+        SceneManager.LoadScene(sceneName);
+
+    }
+
+    public void InitTextBox(TextAsset text, int start, int end , bool load , string scene , float time)
     {
         ReloadScript(text);
         currentLine = start;
         endLine = end;
         LoadSceneWhenDone = load;
         sceneName = scene;
+        timeDur = time;
         EnableTextBox();
     }
 
