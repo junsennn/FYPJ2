@@ -18,6 +18,15 @@ public class GameLevelSettings : MonoBehaviour {
 
     private List<GameObject> binList = new List<GameObject>();
 
+    public enum GameState
+    {
+        Win,
+        Lose,
+        Ongoing
+    };
+
+    public GameState currentState = GameState.Ongoing;
+
     // Use this for initialization
     void Start () {
         foreach (Transform child in GameObject.Find("RubbishBins").transform)
@@ -27,17 +36,42 @@ public class GameLevelSettings : MonoBehaviour {
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        CheckRubbishCount();
-
-        TimeElapsed += Time.deltaTime;
-
-        if (TimeElapsed > TimeLimit)
+        switch (currentState)
         {
-            //if (  )
+            case GameState.Ongoing:
+                {
+                    CheckRubbishCount();
+
+                    TimeElapsed += Time.deltaTime;
+
+                    if (RubbishCollected >= MinRubbishRequired)
+                        currentState = GameState.Win;
+
+                    if (TimeElapsed > TimeLimit)
+                    {
+                        if (RubbishCollected >= MinRubbishRequired)
+                            currentState = GameState.Win;
+                        else
+                            currentState = GameState.Lose;
+                    }
+                }
+                break;
+
+            case GameState.Win:
+                {
+                    WinPanel.SetActive(true);
+                }
+                break;
+
+            case GameState.Lose:
+                {
+                    LosePanel.SetActive(true);
+                }
+                break;
         }
 
     }
