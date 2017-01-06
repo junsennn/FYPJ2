@@ -2,9 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameLevelSettings : MonoBehaviour {
    
+	public FirstPersonController player;
+
     private GameObject canvas;
 
     public GameObject WinPanel;
@@ -35,6 +38,8 @@ public class GameLevelSettings : MonoBehaviour {
         canvas = GameObject.Find("Canvas");
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
+
+		player = FindObjectOfType<FirstPersonController>();
 	}
 
     // Update is called once per frame
@@ -58,18 +63,27 @@ public class GameLevelSettings : MonoBehaviour {
                         else
                             currentState = GameState.Lose;
                     }
+					
+					player.canMove = true;
+					player.showCursor = false;
                 }
                 break;
 
             case GameState.Win:
                 {
                     WinPanel.SetActive(true);
+
+					player.canMove = false;
+					player.showCursor = true;
                 }
                 break;
 
             case GameState.Lose:
                 {
                     LosePanel.SetActive(true);
+
+					player.canMove = false;
+					player.showCursor = true;
                 }
                 break;
         }

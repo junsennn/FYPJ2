@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class ActivateTextLines : MonoBehaviour {
 
@@ -20,14 +21,18 @@ public class ActivateTextLines : MonoBehaviour {
 	public AudioSource sound;
 
     public bool LoadSceneWhenEnd = false;
+	public bool showTheCursor = false;
 
     public string sceneName = "";
 
     public float TimeTillLoad = 0.0f;
 
+	public FirstPersonController player;
+
 	// Use this for initialization
 	void Start () {
 		manager = FindObjectOfType<TextBoxManager> ();
+		player = FindObjectOfType<FirstPersonController>();
 	}
 	
 	// Update is called once per frame
@@ -60,6 +65,10 @@ public class ActivateTextLines : MonoBehaviour {
 			}
 
 			isEnded = true;
+
+			if (showTheCursor == true) {
+				player.showCursor = true;
+			}
 		}
 	}
 

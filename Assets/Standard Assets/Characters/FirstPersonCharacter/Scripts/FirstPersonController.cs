@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -41,6 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+		public bool showCursor = false;
 
 		// To stop the player from moving
 		public bool canMove;
@@ -86,8 +88,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 				m_PreviouslyGrounded = m_CharacterController.isGrounded;
 			}
-        }
 
+			if(showCursor == false) {
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
+			} else{
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
+        }
+			
 
         private void PlayLandingSound()
         {
