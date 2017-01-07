@@ -3,16 +3,16 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class TimeLimitCounter : MonoBehaviour {
-
-	public double timer = 60.0;
+    
+    private GameObject gamecontrol;
 
 	// Use this for initialization
 	void Start () {
+        gamecontrol = GameObject.Find("GameplayControl");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		timer -= Time.deltaTime;
-		GetComponent<Text> ().text = "Time Left: " + timer.ToString();
+		GetComponent<Text> ().text = "Time Left: " + (gamecontrol.GetComponent<GameLevelSettings>().TimeLimit - gamecontrol.GetComponent<GameLevelSettings>().TimeElapsed).ToString("F2");
 	}
 }

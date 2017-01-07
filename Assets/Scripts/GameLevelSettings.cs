@@ -14,7 +14,7 @@ public class GameLevelSettings : MonoBehaviour {
     public GameObject LosePanel;
 
     public float TimeLimit;
-    private float TimeElapsed;
+    public float TimeElapsed;
 
     public int MinRubbishRequired;
     private int RubbishCollected = 0;
@@ -58,6 +58,8 @@ public class GameLevelSettings : MonoBehaviour {
 
                     if (TimeElapsed > TimeLimit)
                     {
+                        TimeElapsed = 0;
+
                         if (RubbishCollected >= MinRubbishRequired)
                             currentState = GameState.Win;
                         else
