@@ -140,11 +140,13 @@ public class TextBoxManager : MonoBehaviour {
 	{
 		textBox.SetActive (true);
 
-		stopPlayer = true;
+		//stopPlayer = true;
 
-		if (stopPlayer == true) {
-			player.canMove = false;
-		}
+	//	if (stopPlayer == true) {
+	//		player.canMove = false;
+	//	}
+
+		player.GetComponent<FirstPersonController> ().enabled = false;
 
 		isActive = true;
 
@@ -157,7 +159,8 @@ public class TextBoxManager : MonoBehaviour {
 	{
 		textBox.SetActive (false);
 		isActive = false;
-		player.canMove = true;
+		//player.canMove = true;
+		player.GetComponent<FirstPersonController> ().enabled = true;
 	}
 
 	public void ReloadScript(TextAsset thisText)

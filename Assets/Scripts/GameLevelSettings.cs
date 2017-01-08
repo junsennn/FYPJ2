@@ -10,8 +10,8 @@ public class GameLevelSettings : MonoBehaviour {
 
     private GameObject canvas;
 
-    public GameObject WinPanel;
-    public GameObject LosePanel;
+	public Transform WinPanel;
+	public Transform LosePanel;
 
     public float TimeLimit;
     public float TimeElapsed;
@@ -36,8 +36,8 @@ public class GameLevelSettings : MonoBehaviour {
             binList.Add(child.gameObject);
 
         canvas = GameObject.Find("Canvas");
-        WinPanel.SetActive(false);
-        LosePanel.SetActive(false);
+        WinPanel.gameObject.SetActive(false);
+		LosePanel.gameObject.SetActive(false);
 
 		player = FindObjectOfType<FirstPersonController>();
 	}
@@ -73,7 +73,7 @@ public class GameLevelSettings : MonoBehaviour {
 
             case GameState.Win:
                 {
-                    WinPanel.SetActive(true);
+				WinPanel.gameObject.SetActive(true);
 
 					player.canMove = false;
 					player.showCursor = true;
@@ -82,7 +82,7 @@ public class GameLevelSettings : MonoBehaviour {
 
             case GameState.Lose:
                 {
-                    LosePanel.SetActive(true);
+				LosePanel.gameObject.SetActive(true);
 
 					player.canMove = false;
 					player.showCursor = true;
