@@ -13,8 +13,11 @@ public class GameLevelSettings : MonoBehaviour {
 	public Transform WinPanel;
 	public Transform LosePanel;
 
+	public GameObject PoisonMist;
+
     public float TimeLimit;
     public float TimeElapsed;
+	public float PoisonTime;
 
     public int MinRubbishRequired;
     private int RubbishCollected = 0;
@@ -65,6 +68,10 @@ public class GameLevelSettings : MonoBehaviour {
                         else
                             currentState = GameState.Lose;
                     }
+
+				if (TimeElapsed > PoisonTime) {
+					PoisonMist.gameObject.SetActive (true);
+				}
 					
 					player.canMove = true;
 					player.showCursor = false;
