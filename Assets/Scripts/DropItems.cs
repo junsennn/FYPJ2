@@ -35,6 +35,8 @@ public class DropItems : MonoBehaviour {
             
             newRubbish.transform.position = transform.position + new Vector3(0,heightDrop,0);
 
+            newRubbish.GetComponent<Rubbish_OG_pos>().SetOG(newRubbish.transform.position,newRubbish.transform.rotation);
+
             newRubbish.SetActive(true);
         }
 	
