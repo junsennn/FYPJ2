@@ -22,6 +22,8 @@ public class GameLevelSettings : MonoBehaviour {
     public int MinRubbishRequired;
     private int RubbishCollected = 0;
 
+	public bool playerTakeDamage = false;
+
     private List<GameObject> binList = new List<GameObject>();
 
     public enum GameState
@@ -69,12 +71,21 @@ public class GameLevelSettings : MonoBehaviour {
                             currentState = GameState.Lose;
                     }
 
-				if (TimeElapsed > PoisonTime) {
-					PoisonMist.gameObject.SetActive (true);
-				}
-					
+					if (TimeElapsed > PoisonTime)
+					{
+						PoisonMist.gameObject.SetActive (true);
+					player.myHealth -= Time.deltaTime;
+
+						if (player.myHealth == 0) 
+						{
+							player.myHealth = 0;
+							currentState = GameState.Lose;
+						}
+					}
+
 					player.canMove = true;
 					player.showCursor = false;
+					
                 }
                 break;
 
@@ -106,5 +117,4 @@ public class GameLevelSettings : MonoBehaviour {
         for (int i = 0; i < binList.Count; i++)
             RubbishCollected += binList[i].GetComponent<BinCount>().objectCounts;
     }
-
 }
