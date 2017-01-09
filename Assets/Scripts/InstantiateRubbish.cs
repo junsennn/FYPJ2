@@ -24,13 +24,14 @@ public class InstantiateRubbish : MonoBehaviour {
         {
             GameObject newRubbish = Instantiate<GameObject>(rubbishPool.transform.GetChild(Random.Range(0, poolSize)).gameObject);
 
+            newRubbish.SetActive(true);
+
             newRubbish.transform.position = new Vector3(Random.Range(centrePoint.x - scale.x/2, centrePoint.x + scale.x / 2), centrePoint.y , Random.Range(centrePoint.z - scale.z / 2, centrePoint.z + scale.z / 2));
             while(newRubbish.GetComponent<Rubbish_OG_pos>().cState == Rubbish_OG_pos.collisionState.Enter || newRubbish.GetComponent<Rubbish_OG_pos>().cState == Rubbish_OG_pos.collisionState.Stay)
             {   
                 newRubbish.transform.position = new Vector3(Random.Range(centrePoint.x - scale.x / 2, centrePoint.x + scale.x / 2), centrePoint.y, Random.Range(centrePoint.z - scale.z / 2, centrePoint.z + scale.z / 2));
             }
 
-            newRubbish.SetActive(true);
 
             newRubbish.GetComponent<Rubbish_OG_pos>().SetOG(newRubbish.transform.position, newRubbish.transform.rotation);
 

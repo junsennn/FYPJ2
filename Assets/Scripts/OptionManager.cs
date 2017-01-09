@@ -28,10 +28,14 @@ public class OptionManager : MonoBehaviour {
 		musicVolumeSlider.onValueChanged.AddListener (delegate {OnMusicVolumeChange (); });
 		applyButton.onClick.AddListener(delegate {OnApplyButtonClick(); });
 
-		// For the number of resolutions.
+        // For the number of resolutions.
+
+        //int counter = 0;
 		resolutions = Screen.resolutions;
 		foreach (Resolution resolution in resolutions) {
 			resolutionDropDown.options.Add (new Dropdown.OptionData (resolution.ToString ()));
+            //resolutionDropDown.options[counter].text
+            //counter += 1;
 		}
 	}
 
