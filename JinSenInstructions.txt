@@ -1,0 +1,17 @@
+Hello :) Thank you for wanting to play the rubbish game.
+Here are the set of instructions:
+
+1. "W,A,S,D" for player's movement.
+2. "Mouse movement" for camera's view.
+3. Hold down the left-click button to carry the item.
+4. Press the "G" button to unequip the current weapon. Go near the weapon to equip it.
+5. If you are using "Z's Gun", press the "left mouse button" to shoot a warp.
+You can hold down the "left-click button" to carry multiple items. "Mouse-scroll" to distance
+yourself and the items. "Right mouse button" to shoot a ball to disperse the items away.
+6. Your objective is to throw away as many rubbish into the bin as fast as possible.
+7. Note that there is a time limit, and if you fail to throw the rubbish away, you will be poisoned.
+
+Do give a feedback after you have played the game. Thank you very much, and have fun playing
+a rubbish game :D
+
+-Team JinSen
