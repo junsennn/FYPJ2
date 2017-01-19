@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIWalk : MonoBehaviour {
+public class AIWalk : MonoBehaviour
+{
 
-	public Transform goal;
+    public Transform goal;
 
     private bool isAI;
 
@@ -11,21 +12,36 @@ public class AIWalk : MonoBehaviour {
     private int randMin = 1;
     private int randMax = 10;
 
+    public float roamRadius = 100.0f;
+
     private NavMeshAgent agent;
 
     // Use this for initialization
-    void Start () {
-		agent = GetComponent<NavMeshAgent> ();
-		agent.destination = goal.position;
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.destination = goal.position;
 
         if (transform.tag.Contains("AI"))
             isAI = true;
 
         randTimeDur = Random.Range(randMin, randMax);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    void FreeRoam()
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * roamRadius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, roamRadius, 1);
+        goal.position = hit.position;
+        agent.destination = goal.position;
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (isAI)
         {
@@ -49,6 +65,9 @@ public class AIWalk : MonoBehaviour {
                 }
 
             }
+
+            if ((transform.position - goal.position).magnitude < 3f)
+                FreeRoam();
         }
-	}
+    }
 }
