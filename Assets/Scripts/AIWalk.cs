@@ -55,16 +55,21 @@ public class AIWalk : MonoBehaviour
 
                 if (isRunning == 0)
                 {
-                    agent.speed = 8;
+                    //agent.speed = 8;
                     GetComponent<Animator>().SetBool("IsWalking", true);
                 }
                 else
                 {
-                    agent.speed = 16;
+                    //agent.speed = 16;
                     GetComponent<Animator>().SetBool("IsWalking", false);
                 }
 
             }
+
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Basic_Run_02") && agent.speed == 8)
+                agent.speed = 16;
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Basic_Walk_01") && agent.speed == 16)
+                agent.speed = 8;
 
             if ((transform.position - goal.position).magnitude < 3f)
                 FreeRoam();
