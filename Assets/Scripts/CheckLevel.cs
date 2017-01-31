@@ -14,11 +14,15 @@ public class CheckLevel : MonoBehaviour {
         {
             transform.GetChild(0).GetComponent<Button>().interactable = false;
             transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
+			transform.GetChild(1).GetComponent<Button>().interactable = false;
+			transform.GetChild(1).GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
         }
         else
         {
             transform.GetChild(0).GetComponent<Button>().interactable = true;
             transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 1.0f);
+			transform.GetChild(1).GetComponent<Button>().interactable = true;
+			transform.GetChild(1).GetComponent<Image>().color = new Color(0, 0, 0, 1.0f);
         }
     }
 	
