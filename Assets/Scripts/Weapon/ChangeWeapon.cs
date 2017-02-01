@@ -9,6 +9,9 @@ public class ChangeWeapon : MonoBehaviour {
 
     public Text weapon_Name;
 
+    private GameObject redCrosshair;
+    private GameObject greenCrosshair;
+
 	// Use this for initialization
 	void Start () {
         
@@ -19,6 +22,9 @@ public class ChangeWeapon : MonoBehaviour {
         gunTransform.transform.rotation = transform.GetChild(0).rotation;
 
         weapon_Name.text = transform.GetChild(0).name;
+
+        redCrosshair = GameObject.Find("RedCrosshair");
+        greenCrosshair = GameObject.Find("GreenCrosshair");
     }
 	
     void OnTriggerEnter(Collider col)
@@ -52,6 +58,9 @@ public class ChangeWeapon : MonoBehaviour {
                 Destroy(GetComponent<ObjectGrab>());
             if (transform.GetChild(0).name == "Zarya Gun")
                 Destroy(GetComponent<ZaryaGun>());
+
+            redCrosshair.SetActive(true);
+            greenCrosshair.SetActive(true);
 
             transform.GetChild(0).gameObject.AddComponent<Rigidbody>();
             transform.GetChild(0).GetComponent<Rigidbody>().AddForce(transform.GetComponent<Camera>().transform.forward * 300);

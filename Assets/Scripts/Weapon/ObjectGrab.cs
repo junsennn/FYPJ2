@@ -56,11 +56,8 @@ public class ObjectGrab : MonoBehaviour
             //print("Im looking at " + hit.transform.name);
             if (hit.collider.tag == "Rubbish")
             {
-                if (redCrosshair.activeInHierarchy)
-                {
-                    redCrosshair.SetActive(false);
-                    greenCrosshair.SetActive(true);
-                }
+                redCrosshair.SetActive(false);
+                greenCrosshair.SetActive(true);
 
                 //if(Input.GetKeyDown(KeyCode.E) && itemGrabbed == null)
                 if (Input.GetMouseButton(0) && itemGrabbed == null && !Shot)
