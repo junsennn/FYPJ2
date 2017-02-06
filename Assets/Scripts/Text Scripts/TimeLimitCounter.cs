@@ -12,7 +12,8 @@ public class TimeLimitCounter : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		GetComponent<Text> ().text = "Time Left: " + (gamecontrol.GetComponent<GameLevelSettings>().TimeLimit - gamecontrol.GetComponent<GameLevelSettings>().TimeElapsed).ToString("F2");
-	}
+	void Update ()
+    {
+		GetComponent<Image>().fillAmount = (gamecontrol.GetComponent<GameLevelSettings>().TimeLimit - gamecontrol.GetComponent<GameLevelSettings>().TimeElapsed) / gamecontrol.GetComponent<GameLevelSettings>().TimeLimit;
+    }
 }

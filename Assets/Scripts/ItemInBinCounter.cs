@@ -34,7 +34,7 @@ public class ItemInBinCounter : MonoBehaviour {
         }    
 
         if(text)
-            binText.text = "Item In Bin :" + binAmount;
+            binText.text = " : " + binAmount;
 
 	}
 }

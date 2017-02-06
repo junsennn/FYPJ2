@@ -3,25 +3,45 @@ using System.Collections;
 
 public class WeaponBobbing : MonoBehaviour {
 
-	private float mouseX;
-	private float mouseY;
+    private float timer = 0.0f;
+    float bobbingSpeed = 0.18f;
+    float bobbingAmount = 0.2f;
+    float midpoint = -0.6f;
 
-	Quaternion rotationSpeed;
+    void FixedUpdate()
+    {
+        float waveslice = 0.0f;
+        float horizontal = Input.GetAxis("Mouse Y");
+        float vertical = Input.GetAxis("Mouse X");
 
-	public float speed;
+        Vector3 cSharpConversion = transform.localPosition;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		mouseX = Input.GetAxis ("Mouse X");
-		mouseY = Input.GetAxis ("Mouse Y");
+        if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
+        {
+            timer = 0.0f;
+        }
+        else {
+            waveslice = Mathf.Sin(timer);
+            timer = timer + bobbingSpeed;
+            if (timer > Mathf.PI * 2)
+            {
+                timer = timer - (Mathf.PI * 2);
+            }
+        }
+        if (waveslice != 0)
+        {
+            float translateChange = waveslice * bobbingAmount;
+            float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+            translateChange = totalAxes * translateChange;
+            cSharpConversion.y = midpoint + translateChange;
+        }
+        else {
+            cSharpConversion.y = midpoint;
+        }
 
-		rotationSpeed = Quaternion.Euler (-mouseY * 5, mouseX * 5, 0);
+        transform.localPosition = cSharpConversion;
+    }
 
-		transform.localRotation = Quaternion.Slerp (transform.localRotation, rotationSpeed, speed * Time.deltaTime);
-	}
+
 }
