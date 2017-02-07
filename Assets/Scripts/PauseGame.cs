@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour {
 
@@ -45,5 +46,15 @@ public class PauseGame : MonoBehaviour {
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
+	}
+
+	public void RetryTownLevel1()
+	{
+		SceneManager.LoadScene("TownLevel", LoadSceneMode.Single);
+	}
+
+	public void ReturnToMainMenu()
+	{
+		SceneManager.LoadScene("MainMenu");
 	}
 }

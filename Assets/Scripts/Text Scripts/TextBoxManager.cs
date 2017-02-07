@@ -68,7 +68,7 @@ public class TextBoxManager : MonoBehaviour {
 		//thisText.text = textLines [currentLine];
 
 		// Press 'Enter' key to move on to the next text
-		if (Input.GetKeyDown (KeyCode.Return)) {
+		if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.E)) {
 			if (isTyping == false) 
 			{
 				currentLine += 1;

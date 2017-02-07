@@ -37,7 +37,7 @@ public class ActivateTextLines : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (waitBtnPress == true && Input.GetKeyDown (KeyCode.E)) {
+		if (waitBtnPress == true && (Input.GetKeyDown (KeyCode.E) || Input.GetKeyDown(KeyCode.Space))) {
 
             manager.InitTextBox(thisText, startLine, endLine, LoadSceneWhenEnd, sceneName , TimeTillLoad);
 
