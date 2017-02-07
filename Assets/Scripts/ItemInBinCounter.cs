@@ -11,6 +11,8 @@ public class ItemInBinCounter : MonoBehaviour {
     public Text binText;
     public bool text;
 
+	public GameObject gameControl;
+
     private int binAmount;
 
 	// Use this for initialization
@@ -34,7 +36,7 @@ public class ItemInBinCounter : MonoBehaviour {
         }    
 
         if(text)
-            binText.text = " : " + binAmount;
+			binText.text = " : " + binAmount + " / " + gameControl.GetComponent<GameLevelSettings>().MinRubbishRequired;
 
 	}
 }

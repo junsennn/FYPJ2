@@ -50,7 +50,12 @@ public class PauseGame : MonoBehaviour {
 
 	public void RetryTownLevel1()
 	{
-		SceneManager.LoadScene("TownLevel", LoadSceneMode.Single);
+		SceneManager.LoadScene("TownLevel");
+	}
+
+	public void RetryTownLevel2()
+	{
+		SceneManager.LoadScene("TownLevel2");
 	}
 
 	public void ReturnToMainMenu()
